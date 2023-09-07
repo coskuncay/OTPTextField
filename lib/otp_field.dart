@@ -184,7 +184,10 @@ class _OTPTextFieldState extends State<OTPTextField> {
         keyboardType: widget.keyboardType,
         textCapitalization: widget.textCapitalization,
         textAlign: TextAlign.center,
-        style: widget.style,
+        style: _focusNodes[index]!.hasFocus &&
+                _otpFieldStyle.focusedInputColor != null
+            ? widget.style.copyWith(color: _otpFieldStyle.focusedInputColor!)
+            : widget.style,
         inputFormatters: widget.inputFormatter,
         maxLength: 1,
         focusNode: _focusNodes[index],
@@ -192,7 +195,9 @@ class _OTPTextFieldState extends State<OTPTextField> {
         decoration: InputDecoration(
           isDense: widget.isDense,
           filled: true,
-          fillColor: _otpFieldStyle.backgroundColor,
+          fillColor: _focusNodes[index]!.hasFocus
+              ? _otpFieldStyle.focusedBackgroundColor
+              : _otpFieldStyle.backgroundColor,
           counterText: "",
           contentPadding: widget.contentPadding,
           border: _getBorder(_otpFieldStyle.borderColor),
@@ -258,6 +263,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
       controller.selection = TextSelection.fromPosition(
           TextPosition(offset: controller.text.length));
     }
+    setState(() {});
   }
 
   String _getCurrentPin() {
