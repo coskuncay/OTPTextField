@@ -25,13 +25,22 @@ class OtpFieldStyle {
   /// The border color of text field when disabled.
   final Color errorBorderColor;
 
-  OtpFieldStyle(
-      {this.backgroundColor: Colors.transparent,
-      this.focusedBackgroundColor: Colors.transparent,
-      this.borderColor: Colors.black26,
-      this.focusBorderColor: Colors.blue,
-      this.disabledBorderColor: Colors.grey,
-      this.enabledBorderColor: Colors.black26,
-      this.errorBorderColor: Colors.red,
-      this.focusedInputColor,});
+  /// The text color of text field when there is an error.
+  Color? errorInputColor;
+
+  /// The background color of text field when there is an error.
+  final Color errorBackgroundColor;
+
+  OtpFieldStyle({
+    this.backgroundColor: Colors.transparent,
+    this.focusedBackgroundColor: Colors.transparent,
+    this.borderColor: Colors.black26,
+    this.focusBorderColor: Colors.blue,
+    this.disabledBorderColor: Colors.grey,
+    this.enabledBorderColor: Colors.black26,
+    this.errorBorderColor: Colors.red,
+    this.focusedInputColor,
+    this.errorBackgroundColor: Colors.transparent,
+    this.errorInputColor,
+  });
 }

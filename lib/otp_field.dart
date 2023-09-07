@@ -184,10 +184,13 @@ class _OTPTextFieldState extends State<OTPTextField> {
         keyboardType: widget.keyboardType,
         textCapitalization: widget.textCapitalization,
         textAlign: TextAlign.center,
-        style: _focusNodes[index]!.hasFocus &&
-                _otpFieldStyle.focusedInputColor != null
-            ? widget.style.copyWith(color: _otpFieldStyle.focusedInputColor!)
-            : widget.style,
+        style: widget.hasError
+            ? widget.style.copyWith(color: _otpFieldStyle.errorInputColor)
+            : _focusNodes[index]!.hasFocus &&
+                    _otpFieldStyle.focusedInputColor != null
+                ? widget.style
+                    .copyWith(color: _otpFieldStyle.focusedInputColor!)
+                : widget.style,
         inputFormatters: widget.inputFormatter,
         maxLength: 1,
         focusNode: _focusNodes[index],
@@ -195,9 +198,11 @@ class _OTPTextFieldState extends State<OTPTextField> {
         decoration: InputDecoration(
           isDense: widget.isDense,
           filled: true,
-          fillColor: _focusNodes[index]!.hasFocus
-              ? _otpFieldStyle.focusedBackgroundColor
-              : _otpFieldStyle.backgroundColor,
+          fillColor: widget.hasError
+              ? _otpFieldStyle.errorBackgroundColor
+              : _focusNodes[index]!.hasFocus
+                  ? _otpFieldStyle.focusedBackgroundColor
+                  : _otpFieldStyle.backgroundColor,
           counterText: "",
           contentPadding: widget.contentPadding,
           border: _getBorder(_otpFieldStyle.borderColor),
