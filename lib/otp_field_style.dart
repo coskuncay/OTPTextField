@@ -32,5 +32,6 @@ class OtpFieldStyle {
       this.focusBorderColor: Colors.blue,
       this.disabledBorderColor: Colors.grey,
       this.enabledBorderColor: Colors.black26,
-      this.errorBorderColor: Colors.red});
+      this.errorBorderColor: Colors.red,
+      this.focusedInputColor,});
 }
