@@ -73,7 +73,7 @@ class OTPTextField extends StatefulWidget {
     this.hasError = false,
     this.keyboardType = TextInputType.number,
     this.style = const TextStyle(),
-    this.outlineBorderRadius: 10,
+    this.outlineBorderRadius = 10,
     this.textCapitalization = TextCapitalization.none,
     this.textFieldAlignment = MainAxisAlignment.spaceBetween,
     this.obscureText = false,
@@ -192,7 +192,7 @@ class _OTPTextFieldState extends State<OTPTextField> {
                     .copyWith(color: _otpFieldStyle.focusedInputColor!)
                 : widget.style,
         inputFormatters: widget.inputFormatter,
-        maxLength: 1,
+        maxLength: 6,
         focusNode: _focusNodes[index],
         obscureText: widget.obscureText,
         decoration: InputDecoration(
