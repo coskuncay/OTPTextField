@@ -286,21 +286,20 @@ class _OTPTextFieldState extends State<OTPTextField> {
         _textControllers[i]!.text = digit;
         _pin[i] = digit;
       } else {
-        _textControllers[i]!.text = ''; // Eğer karakter eksikse, boş bırak
+        _textControllers[i]!.text = '';
       }
     }
 
-    FocusScope.of(context).requestFocus(_focusNodes[0]); // İlk kutuya odaklan
+    FocusScope.of(context).requestFocus(_focusNodes[widget.length - 1]);
 
     String currentPin = _getCurrentPin();
 
-    // if there are no empty values that means otp is completed
-    // Call the `onCompleted` callback function provided
-    if (!currentPin.contains('') && currentPin.length == widget.length) {
+    if (!_pin.contains(null) &&
+        !_pin.contains('') &&
+        currentPin.length == widget.length) {
       widget.onCompleted?.call(currentPin);
     }
 
-    // Call the `onChanged` callback function
     widget.onChanged!(currentPin);
   }
 }
