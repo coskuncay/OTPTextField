@@ -280,25 +280,23 @@ class _OTPTextFieldState extends State<OTPTextField> {
   }
 
   void _handlePaste(String str) {
-    if (str.length > widget.length) {
-      str = str.substring(0, widget.length);
+    for (int i = 0; i < widget.length; i++) {
+      if (i < str.length) {
+        String digit = str.substring(i, i + 1);
+        _textControllers[i]!.text = digit;
+        _pin[i] = digit;
+      } else {
+        _textControllers[i]!.text = ''; // Eğer karakter eksikse, boş bırak
+      }
     }
 
-    for (int i = 0; i < str.length; i++) {
-      String digit = str.substring(i, i + 1);
-      _textControllers[i]!.text = digit;
-      _pin[i] = digit;
-    }
-
-    FocusScope.of(context).requestFocus(_focusNodes[widget.length - 1]);
+    FocusScope.of(context).requestFocus(_focusNodes[0]); // İlk kutuya odaklan
 
     String currentPin = _getCurrentPin();
 
-    // if there are no null values that means otp is completed
+    // if there are no empty values that means otp is completed
     // Call the `onCompleted` callback function provided
-    if (!_pin.contains(null) &&
-        !_pin.contains('') &&
-        currentPin.length == widget.length) {
+    if (!currentPin.contains('') && currentPin.length == widget.length) {
       widget.onCompleted?.call(currentPin);
     }
 
